@@ -5,7 +5,7 @@
 [![Live Site](https://img.shields.io/badge/Live%20Site-Visit-brightgreen)](https://rakesh-biswas-portfolio-nextjs.vercel.app/)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/Rakesh01999/portfolio-nextjs-user-frontend)
 
-![Portfolio Banner](https://via.placeholder.com/1200x400)
+![Portfolio Banner](https://i.postimg.cc/wBjW6bvF/banner.jpg)
 
 ## 📌 Overview
 
