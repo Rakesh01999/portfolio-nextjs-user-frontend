@@ -11,7 +11,6 @@ import {
 import createMessage from "@/utils/actions/createMessage";
 import { toast } from "sonner";
 
-
 const ContactMe = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,68 +28,76 @@ const ContactMe = () => {
       if (res?.success) {
         toast.success("Successfully sent Message");
       }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      toast.error("EMail subject body must be need");
+      toast.error("Email subject and body are required");
       throw new Error(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen py-16 px-6 flex justify-center items-center">
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-20 gap-10 max-w-6xl w-full">
-        <div className="space-y-6">
-          <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+    <section className="min-h-screen bg-gray-100 dark:bg-gray-900 py-20 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Left Section - Contact Info */}
+        <div className="space-y-6 text-gray-800 dark:text-white mt-10">
+          <h2 className="text-xl md:text-2xl lg:text-4xl font-bold text-cyan-600 dark:text-cyan-400">
+            Contact Information
+          </h2>
 
-          <div className="flex items-center gap-5">
-            <FaMapMarkerAlt size={30} />
-            <p className="text-lg">Dhaka, Bangladesh</p>
+          <div className="flex items-center gap-4">
+            <FaMapMarkerAlt className="text-cyan-500" size={22} />
+            <p className="text-lg">Khulna, Bangladesh</p>
           </div>
 
-          <div className="flex items-center gap-5">
-            <FaPhoneAlt size={30} />
-            <p className="text-lg">+8801922208141</p>
+          <div className="flex items-center gap-4">
+            <FaPhoneAlt className="text-teal-500" size={22} />
+            <p className="text-lg">+8801999647103</p>
           </div>
 
-          <div className="flex items-center gap-5">
-            <FaWhatsapp size={30} />
-            <p className="text-lg">+8801744136454</p>
+          <div className="flex items-center gap-4">
+            <FaWhatsapp className="text-green-500" size={22} />
+            <p className="text-lg">+8801999647103</p>
           </div>
 
-          <div className="flex items-center gap-5">
-            <FaTelegramPlane size={30} />
-            <p className="text-lg">+8801922208141</p>
+          <div className="flex items-center gap-4">
+            <FaTelegramPlane className="text-blue-400" size={22} />
+            <p className="text-lg">+8801999647103</p>
           </div>
 
-          <div className="flex gap-5 mt-8">
+          <div className="flex gap-6 pt-4">
             <a
-              href="https://www.linkedin.com/in/n-ahamed"
+              href="https://www.linkedin.com/in/rakeshbiswas0199/"
               target="_blank"
               rel="noopener noreferrer"
-              className=" hover:text-blue-700 transition"
+              className="text-cyan-600 hover:text-blue-600 transition"
             >
-              <FaLinkedinIn size={25} />
+              <FaLinkedinIn size={26} />
             </a>
             <a
-              href="https://github.com/nafis200"
+              href="https://github.com/Rakesh01999"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gray-300 transition"
+              className="text-cyan-600 hover:text-gray-600 dark:hover:text-gray-300 transition"
             >
-              <FaGithub size={25} />
+              <FaGithub size={26} />
             </a>
           </div>
         </div>
+
+        {/* Right Section - Contact Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-xl p-8 space-y-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 sm:p-10 space-y-6 mt-10"
         >
-          <h2 className="text-2xl font-bold text-center text-gray-800">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-cyan-600 dark:text-white">
             Send a Message
           </h2>
 
           <div>
-            <label htmlFor="name" className="block text-gray-700 mb-1 font-medium">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Name
             </label>
             <input
@@ -98,13 +105,16 @@ const ContactMe = () => {
               name="name"
               type="text"
               placeholder="Your name"
-              className="input input-bordered w-full"
+              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-gray-700 mb-1 font-medium">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Email
             </label>
             <input
@@ -112,13 +122,16 @@ const ContactMe = () => {
               name="email"
               type="email"
               placeholder="Your email"
-              className="input input-bordered w-full"
+              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-gray-700 mb-1 font-medium">
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
               Message
             </label>
             <textarea
@@ -126,22 +139,22 @@ const ContactMe = () => {
               name="description"
               rows={4}
               placeholder="Write your message..."
-              className="textarea textarea-bordered w-full"
+              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
               required
-            />
+            ></textarea>
           </div>
 
-          <div className="text-center">
+          <div className="text-center pt-2">
             <button
               type="submit"
-              className="btn btn-primary px-8"
+              className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 shadow-md"
             >
               Submit
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 };
 
