@@ -32,8 +32,9 @@ const Navbar1 = () => {
             href={href}
             className={`${
               pathname === href
-                ? "text-blue-600 font-bold"
-                : "text-white hover:text-teal-700"
+                ? "text-white font-bold"
+                : "text-white"
+                // : "text-white hover:text-teal-700"
             } ${label === "Home" ? "ml-3" : ""}`}
           >
             {label}
@@ -82,7 +83,7 @@ const Navbar1 = () => {
   );
 
   return (
-    <div className="navbar fixed z-10 w-full bg-black h-20 text-white">
+    <div className="navbar fixed z-10 w-full bg-cyan-700 h-20 text-white">
       <div className="navbar-start">
         <div className="dropdown">
           <button tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -103,7 +104,7 @@ const Navbar1 = () => {
           </button>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-black rounded-box mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-cyan-700 rounded-box mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
