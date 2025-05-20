@@ -43,7 +43,7 @@ const Allblogs = () => {
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <h2 className="text-3xl sm:text-4xl font-bold text-center mt-10 mb-10 text-cyan-600">
-        Featured Blogs
+        Blog Writings
       </h2>
 
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

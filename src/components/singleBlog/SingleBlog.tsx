@@ -36,32 +36,55 @@ const SingleBlog = ({ blogId }: { blogId: string }) => {
     getBlog();
   }, [blogId]);
 
-  if (loading) return <p>Loading blog...</p>;
-  if (!blog) return <p>Blog not found.</p>;
+  if (loading)
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p className="text-lg md:text-2xl text-cyan-600">Loading blog...</p>
+      </div>
+    );
+
+  if (!blog)
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <p className="text-lg text-red-500 font-medium">Blog not found.</p>
+      </div>
+    );
 
   return (
-    <>
-      <h1>.</h1>
-      <h1 className="mt-20">.</h1>
-      <div className="w-full mx-auto shadow-lg rounded-lg overflow-hidden p-4 flex flex-col md:flex-row items-center gap-10 space-y-5">
-        <Image
-          src={blog.image}
-          alt={blog.title}
-          width={150}
-          height={150}
-          className="w-36 h-36 object-cover rounded-md"
-        />
-        <div className="flex-1">
-          <h2 className="text-xl font-bold">{blog.title}</h2>
+    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden mt-10">
+        <div className="relative h-64 sm:h-96 w-full">
+          <Image
+            src={blog.image}
+            alt={blog.title}
+            fill
+            className="object-cover w-full h-full"
+          />
+        </div>
+
+        <div className="p-6 sm:p-10">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white mb-4">
+            {blog.title}
+          </h1>
+
           <div
-            className="mt-2 text-sm prose"
+            className="prose max-w-none text-gray-700 dark:text-gray-300"
             dangerouslySetInnerHTML={{
               __html: DOMPurify.sanitize(blog.description),
             }}
           ></div>
+
+          <p className="mt-8 text-sm text-gray-500 dark:text-gray-400 italic">
+            Last updated on{" "}
+            {new Date(blog.updatedAt).toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </p>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
