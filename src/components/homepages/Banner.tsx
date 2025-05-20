@@ -5,45 +5,49 @@ import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
   return (
-    <div className="">
+    <div className="w-full">
       <div
-        className="hero max-w-[490px] md:max-w-[1040px] lg:max-w-[1540px] mx-auto mb-10 mt-10 bg-no-repeat bg-cover"
-        // style={{ backgroundImage: "url('/web-development1.png')" }}
+        className="hero max-w-[1540px] mx-auto my-10 bg-cover bg-center rounded-lg shadow-lg"
         style={{ backgroundImage: "url('/banner.jpg')" }}
       >
-        <div className="hero-overlay bg-opacity-70  flex flex-col md:flex-row items-center lg:p-32 md:px-8 px-4 py-8 md:py-2">
-          <div className=" w-full md:w-[70%]">
-            <h1 className="animate__animated animate__fadeInLeft">
-              <span className="text-[40px] md:text-4xl lg:text-6xl font-bold text-white">
-                Hi! I am Rakesh Biswas
-              </span>
+        <div className="hero-overlay bg-black bg-opacity-60 p-6 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-center gap-6">
+          
+          {/* Profile Image */}
+          <div className="flex justify-center items-center w-full md:w-[35%]">
+            {/* <div className="w-36 h-36 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-white animate__animated animate__zoomIn"> */}
+            <div className="w-36 h-36 lg:w-48 lg:h-48  overflow-hidden border-4 border-white animate__animated animate__zoomIn">
+              <Image
+                src="/rakesh2.png"
+                width={300}
+                height={300}
+                alt="Rakesh Biswas"
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+
+          {/* Text Section */}
+          <div className="text-center md:text-left w-full md:w-[65%] text-white space-y-4 animate__animated animate__fadeInLeft">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              Hi ! I am Rakesh Biswas
             </h1>
-            <p className="text-[20px] md:text-2xl lg:text-4xl text-white">
+            <p className="text-xl md:text-2xl lg:text-3xl font-medium">
               <Typewriter
-                words={["Full Stack developer", "Backend Developer", "Frontend developer","Mern Stack developer"]}
-                loop={5}
+                words={[
+                  "Full Stack Developer",
+                  "Backend Developer",
+                  "Frontend Developer",
+                  "MERN Stack Developer",
+                ]}
+                loop={Infinity}
                 cursor
-                cursorStyle=""
+                cursorStyle="|"
                 typeSpeed={70}
                 deleteSpeed={50}
                 delaySpeed={1000}
               />{" "}
-              | Competitive Programmer
+              <span className="block mt-2 text-lg md:text-xl">| Competitive Programmer</span>
             </p>
-          </div>
-
-          <div className="md:rounded-full mt-4 md:w-[30%] md:ml-[50px] lg:ml-32">
-            <h1 className="animate__animated animate__zoomIn">
-              <div className="w-40 h-48 lg:w-52 rounded-full">
-                <Image
-                  src="/imgonline-com-ua-Transparent-background-dCx8Jbt05t (1).jpg"
-                  width={200}
-                  height={200}
-                  className="w-60 h-48 lg:h-56 rounded-full"
-                  alt="Profile"
-                />
-              </div>
-            </h1>
           </div>
         </div>
       </div>
