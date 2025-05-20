@@ -19,56 +19,66 @@ interface ProjectData {
 }
 
 const Allblogs = () => {
-  const [project, setProject] = useState<ProjectData[]>([]);
+  const [blogs, setBlogs] = useState<ProjectData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const getProject = async () => {
+    const getBlogs = async () => {
       setLoading(true);
       const data = await Blogsfetch();
-      setProject(data);
+      setBlogs(data);
       setLoading(false);
     };
 
-    getProject();
+    getBlogs();
   }, []);
 
-  if (loading) return <p>Loading project...</p>;
-  return (
-    <div>
-      <h1>..</h1>
-      <h1 className="mt-20">..</h1>
-      {project?.map((proj, index) => (
-        // eslint-disable-next-line react/jsx-key
-        <Zoom key={index}>
-          <div className="w-full mx-auto shadow-lg rounded-lg overflow-hidden p-4 flex flex-col md:flex-row items-center gap-20 space-y-5">
-            <Image
-              src={proj?.image}
-              alt={proj?.title}
-              width={150}
-              height={150}
-              className="w-36 h-36 object-cover rounded-md"
-            />
-            <div className="flex-1">
-              <h2 className="text-xl font-bold">{proj.title}</h2>
-              <div
-                className="mt-2 text-sm prose"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(proj.description),
-                }}
-              ></div>
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg md:text-2xl font-medium text-cyan-600">Loading blogs...</p>
+      </div>
+    );
 
-              <Link
-                href={`${`blogs/${proj._id}`}`}
-                className="text-blue-500 hover:text-blue-700 mt-2"
-              >
-                View
-              </Link>
+  return (
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center mt-10 mb-10 text-cyan-600">
+        Featured Blogs
+      </h2>
+
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {blogs.map((blog) => (
+          <Zoom key={blog._id}>
+            <div className="bg-white dark:bg-gray-900 shadow-xl rounded-lg overflow-hidden transition-transform hover:-translate-y-1 hover:shadow-2xl">
+              <Image
+                src={blog.image}
+                alt={blog.title}
+                width={500}
+                height={300}
+                className="w-full h-52 object-cover"
+              />
+              <div className="p-5 flex flex-col justify-between h-full">
+                <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+                  {blog.title}
+                </h3>
+                <div
+                  className="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 prose max-w-none"
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(blog.description),
+                  }}
+                ></div>
+                <Link
+                  href={`/blogs/${blog._id}`}
+                  className="inline-block mt-4 text-cyan-600 hover:text-cyan-600 font-medium"
+                >
+                  Read Full Blog →
+                </Link>
+              </div>
             </div>
-          </div>
-        </Zoom>
-      ))}
-    </div>
+          </Zoom>
+        ))}
+      </div>
+    </section>
   );
 };
 
