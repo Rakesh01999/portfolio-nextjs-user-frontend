@@ -10,7 +10,7 @@ const Banner = () => {
         className="hero max-w-[1540px] mx-auto my-10 bg-cover bg-center rounded-lg shadow-lg"
         style={{ backgroundImage: "url('/banner.jpg')" }}
       >
-        <div className="hero-overlay bg-black bg-opacity-60 p-6 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-center gap-6">
+        <div className="hero-overlay bg-black bg-opacity-60 p-6 md:px-12 lg:px-24 py-12 flex flex-col md:flex-row items-center gap-6 ">
           
           {/* Profile Image */}
           <div className="flex justify-center items-center w-full md:w-[35%]">
