@@ -1,258 +1,316 @@
-/* eslint-disable react/jsx-key */
+"use client";
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { SiCodeforces, SiCodechef, SiLeetcode } from "react-icons/si";
 import { GoCodeReview } from "react-icons/go";
 import {
   FaCode,
   FaDatabase,
   FaTools,
-  FaCogs
+  FaCogs,
+  FaHtml5,
+  FaReact,
+  FaJsSquare,
+  FaRegFileCode,
 } from "react-icons/fa";
 import { GiSkills } from "react-icons/gi";
 import { TbCodeDots } from "react-icons/tb";
 import Link from "next/link";
-import { Slide } from "react-awesome-reveal";
 import {
   SiNextdotjs,
   SiRedux,
   SiAntdesign,
   SiTailwindcss,
   SiPrimereact,
+  SiTypescript,
+  SiNodedotjs,
+  SiExpress,
+  SiPostgresql,
+  SiPrisma,
+  SiFirebase,
+  SiGit,
+  SiGithub,
+  SiGooglechrome,
 } from "react-icons/si";
-import { RiBracesLine } from "react-icons/ri";
-import { FaHtml5 } from "react-icons/fa";
-
-import { FaReact } from "react-icons/fa";
-import { FaJsSquare } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
+import { RiBracesLine, RiFileEditLine } from "react-icons/ri";
 import { MdCode } from "react-icons/md";
-import { FaRegFileCode } from "react-icons/fa";
-import { SiNodedotjs, SiExpress } from "react-icons/si";
-import { RiFileEditLine } from "react-icons/ri";
 
-import { SiPostgresql } from "react-icons/si";
-import { SiPrisma } from "react-icons/si";
-import { FaDatabase as FaMongodb } from "react-icons/fa";
-import { SiFirebase } from "react-icons/si";
+// Define types for our skill data structure
+type SkillWithIcon = {
+  icon: React.ReactNode;
+  name: string;
+  color: string;
+};
 
-import { SiGit } from "react-icons/si";
-import { SiGithub } from "react-icons/si";
-import { SiGooglechrome } from "react-icons/si";
+type SoftSkill = {
+  name: string;
+};
+
+type SkillsDataType = {
+  languages: SkillWithIcon[];
+  frontend: SkillWithIcon[];
+  backend: SkillWithIcon[];
+  database: SkillWithIcon[];
+  tools: SkillWithIcon[];
+  soft: SoftSkill[];
+};
+
+// Define a type for our tab IDs that matches keys in skillsData
+type TabId = keyof SkillsDataType;
 
 const Skills = () => {
+  const [activeTab, setActiveTab] = useState<TabId>("languages");
+
+  const tabs = [
+    { id: "languages" as TabId, label: "Languages", icon: <TbCodeDots /> },
+    { id: "frontend" as TabId, label: "Frontend", icon: <FaCode /> },
+    { id: "backend" as TabId, label: "Backend", icon: <FaCogs /> },
+    { id: "database" as TabId, label: "Database", icon: <FaDatabase /> },
+    { id: "tools" as TabId, label: "Tools", icon: <FaTools /> },
+    { id: "soft" as TabId, label: "Soft Skills", icon: <GiSkills /> },
+  ];
+
+  const skillsData: SkillsDataType = {
+    languages: [
+      { icon: <MdCode />, name: "C", color: "text-blue-600" },
+      { icon: <MdCode />, name: "C++", color: "text-blue-600" },
+      { icon: <FaJsSquare />, name: "JavaScript", color: "text-yellow-500" },
+      { icon: <SiTypescript />, name: "TypeScript", color: "text-blue-600" },
+    ],
+    frontend: [
+      { icon: <SiNextdotjs />, name: "Next.js", color: "text-gray-900" },
+      { icon: <FaReact />, name: "React", color: "text-blue-400" },
+      { icon: <SiRedux />, name: "Redux", color: "text-purple-600" },
+      { icon: <SiAntdesign />, name: "Ant Design", color: "text-red-500" },
+      { icon: <SiPrimereact />, name: "PrimeReact", color: "text-blue-500" },
+      { icon: <SiTailwindcss />, name: "Tailwind CSS", color: "text-teal-400" },
+      { icon: <RiBracesLine />, name: "ShadCN", color: "text-gray-800" },
+      { icon: <FaHtml5 />, name: "HTML", color: "text-orange-500" },
+    ],
+    backend: [
+      { icon: <SiNodedotjs />, name: "Node.js", color: "text-green-600" },
+      { icon: <SiExpress />, name: "Express.js", color: "text-gray-700" },
+      {
+        icon: <FaRegFileCode />,
+        name: "MVC pattern",
+        color: "text-orange-500",
+      },
+      { icon: <RiFileEditLine />, name: "Validation", color: "text-blue-500" },
+    ],
+    database: [
+      { icon: <SiPostgresql />, name: "PostgreSQL", color: "text-blue-600" },
+      { icon: <SiPrisma />, name: "Prisma", color: "text-green-600" },
+      { icon: <FaDatabase />, name: "MongoDB", color: "text-green-700" },
+      { icon: <FaDatabase />, name: "Mongoose", color: "text-green-600" },
+      { icon: <SiFirebase />, name: "Firebase", color: "text-orange-500" },
+    ],
+    tools: [
+      { icon: <SiGit />, name: "Git", color: "text-orange-600" },
+      { icon: <SiGithub />, name: "GitHub", color: "text-gray-900" },
+      { icon: <SiGooglechrome />, name: "DevTools", color: "text-blue-500" },
+    ],
+    soft: [
+      { name: "Problem Solving" },
+      { name: "Team Collaboration" },
+      { name: "Conversational English" },
+      { name: "Adaptability" },
+    ],
+  };
+
+  const codingPlatforms = [
+    {
+      name: "CodeForces",
+      icon: <SiCodeforces className="text-4xl text-blue-600" />,
+      href: "https://codeforces.com/profile/rk778",
+    },
+    {
+      name: "CodeChef",
+      icon: <SiCodechef className="text-4xl text-red-600" />,
+      href: "https://www.codechef.com/users/rk999",
+    },
+    {
+      name: "AtCoder",
+      icon: <GoCodeReview className="text-4xl text-gray-800" />,
+      href: "https://atcoder.jp/users/Rakesh01",
+    },
+    {
+      name: "LightOJ",
+      icon: (
+        <span className="text-2xl font-semibold text-blue-800">LightOJ</span>
+      ),
+      href: "https://lightoj.com/user/rakeshbiswas",
+    },
+    {
+      name: "LeetCode",
+      icon: <SiLeetcode className="text-4xl text-blue-800" />,
+      href: "https://leetcode.com/u/rk778/",
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div className="my-12 mt-10 mx-5">
-      <section className="text-center py-16">
-        <h2 className="text-xl md:text-[40px] font-bold mb-6 hover:text-blue-600 transition-colors">
-          Problem Solving Skills
-        </h2>
-        <h1 className="text-lg md:text-xl text-gray-700">
-          I have solved over{" "}
-          <span className="font-semibold text-blue-600">800+</span> problems on
-          various online judges.
-        </h1>
-        <div className="flex justify-center items-center mt-4 space-x-6">
-          <Link
-            href="https://codeforces.com/profile/nafis2000"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiCodeforces className="text-4xl text-blue-600 hover:text-blue-800 transition-transform transform hover:scale-110" />
-          </Link>
-          <Link
-            href="https://www.codechef.com/users/nafis2000"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiCodechef className="text-4xl text-red-600 hover:text-red-800 transition-transform transform hover:scale-110" />
-          </Link>
-          <Link
-            href="https://atcoder.jp/users/nafis2000?contestType=algo"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GoCodeReview className="text-4xl text-gray-800 hover:text-gray-900 transition-transform transform hover:scale-110" />
-          </Link>
-          <Link
-            href="https://lightoj.com/user/nafis2001"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="text-2xl font-semibold text-blue-800 hover:underline">
-              LightOJ
-            </span>
-          </Link>
-          <Link
-            href="https://leetcode.com/u/nafis2000/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <SiLeetcode className="text-4xl text-blue-800 hover:text-orange-600 transition-transform transform hover:scale-110" />
-          </Link>
-        </div>
-      </section>
+    // <div className="w-full bg-gradient-to-b from-white to-gray-50 py-20 px-4">
+    <div className="w-full  py-20 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Technical Skills Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-cyan-500">
+              Technical Skills
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-gray-700 to-cyan-500 mx-auto"></div>
+          </div>
 
-      <h2 className="text-4xl font-bold text-center mb-8">
-        My Technical Skills
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 md:h-[474px] lg:h-[390px]">
-            <TbCodeDots className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-7">Languages</h4>
-            <ul className="list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <li className="flex flex-col items-center space-y-2">
-                <MdCode className="text-4xl text-blue-600" />
-                <span>C</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <MdCode className="text-4xl text-blue-600" />
-                <span>C++</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaJsSquare className="text-4xl text-yellow-500" />
-                <span>JavaScript</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiTypescript className="text-4xl text-blue-600" />
-                <span>TypeScript</span>
-              </li>
-            </ul>
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center px-5 py-3 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
+                  activeTab === tab.id
+                    ? "bg-gray-700 text-white shadow-lg shadow-cyan-400/30"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                <span className="mr-2">{tab.icon}</span>
+                {tab.label}
+              </button>
+            ))}
           </div>
-        </Slide>
 
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
-            <FaCode className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-7">Frontend</h4>
-            <ul className="list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <li className="flex flex-col items-center space-y-2">
-                <SiNextdotjs className="text-4xl text-gray-900" />
-                <span>Next.js</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaReact className="text-4xl text-blue-400" />
-                <span>React</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiRedux className="text-4xl text-purple-600" />
-                <span>Redux</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiAntdesign className="text-4xl text-red-500" />
-                <span>Ant Design</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiPrimereact className="text-4xl text-blue-500" />
-                <span>PrimeReact</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiTailwindcss className="text-4xl text-teal-400" />
-                <span>Tailwind CSS</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <RiBracesLine className="text-4xl text-black" />
-                <span>ShadCN</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaHtml5 className="text-4xl text-orange-500" />
-                <span>HTML</span>
-              </li>
-            </ul>
-          </div>
-        </Slide>
+          {/* Skills Grid */}
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full"
+          >
+            {activeTab !== "soft" ? (
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
+              >
+                {skillsData[activeTab].map((skill, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    whileHover={{
+                      y: -5,
+                      // boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.2)",
+                      // backgroundColor: "#f3f4f6",
+                      boxShadow: "0 10px 25px -5px rgba(6, 182, 212, 0.3)",
+                    }}
+                    className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center justify-center transition-all h-32"
+                  >
+                    {"icon" in skill && (
+                      <div className={`text-4xl mb-3 ${skill.color}`}>
+                        {skill.icon}
+                      </div>
+                    )}
+                    <span className="text-center font-medium text-gray-800">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                {skillsData.soft.map((skill, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white rounded-xl shadow-md p-6 flex items-center gap-4"
+                  >
+                    {/* <div className="bg-blue-100 rounded-full p-3"> */}
+                    <div className="bg-gray-600 rounded-full p-3">
+                      <GiSkills className="text-2xl text-cyan-300" />
+                    </div>
+                    <span className="font-medium text-gray-800">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </motion.section>
 
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 md:h-[474px] lg:h-[390px]">
-            <FaCogs className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-7">Backend</h4>
-            <ul className="list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <li className="flex flex-col items-center space-y-2">
-                <SiNodedotjs className="text-4xl text-green-600" />
-                <span>Node.js</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiExpress className="text-4xl text-gray-700" />
-                <span>Express.js</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaRegFileCode className="text-4xl text-orange-500" />
-                <span>MVC pattern</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <RiFileEditLine className="text-4xl text-blue-500" />
-                <span>Validation</span>
-              </li>
-            </ul>
+        {/* Problem Solving Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-24"
+        >
+          <div className="text-center my-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-cyan-500">
+              Problem Solving Skills
+            </h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
+              I have solved over
+              <span className="font-semibold text-cyan-600"> 400+ </span>
+              problems on various competitive programming platforms.
+            </p>
           </div>
-        </Slide>
 
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 md:h-[474px] lg:h-[390px]">
-            <FaDatabase className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-7">Database</h4>
-            <ul className="list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <li className="flex flex-col items-center space-y-2">
-                <SiPostgresql className="text-4xl text-blue-600" />
-                <span>Postgresql</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiPrisma className="text-4xl text-green-600" />
-                <span>Prisma</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaMongodb className="text-4xl text-green-700" />
-                <span>Mongoose</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <FaDatabase className="text-4xl text-green-600" />
-                <span>MongoDB</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiFirebase className="text-4xl text-orange-500" />
-                <span>Firebase</span>
-              </li>
-            </ul>
-          </div>
-        </Slide>
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 md:h-[474px] lg:h-[390px]">
-            <FaTools className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-7">Tools</h4>
-            <ul className="list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <li className="flex flex-col items-center space-y-2">
-                <SiGithub className="text-4xl text-blue-500" />
-                <span>GitHub</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiGit className="text-4xl text-orange-600" />
-                <span>Git</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiGithub className="text-4xl text-black" />
-                <span>GitHub</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiGooglechrome className="text-4xl text-yellow-500" />
-                <span>DevTools</span>
-              </li>
-              <li className="flex flex-col items-center space-y-2">
-                <SiGooglechrome className="text-4xl text-blue-600" />
-                <span>Browse</span>
-              </li>
-            </ul>
-          </div>
-        </Slide>
-
-        <Slide>
-          <div className="skill-category bg-base-100 hover:bg-cyan-200 hover:text-black p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 md:h-[474px] lg:h-[390px]">
-            <GiSkills className="text-4xl mb-4 text-blue-600" />
-            <h4 className="text-xl font-bold mb-2">Soft Skills</h4>
-            <ul className="list-none">
-              <li>Problem Solving</li>
-              <li>Conversational English (comfortable)</li>
-            </ul>
-          </div>
-        </Slide>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 md:max-w-4xl mx-auto"
+          >
+            {codingPlatforms.map((platform, index) => (
+              <Link
+              key={index}
+                  
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center space-y-3"
+              >
+                <motion.div
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-white hover:shadow-lg hover:shadow-cyan-700 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center transition-all"
+                >
+                  {platform.icon}
+                  <span className="text-sm font-medium text-gray-800">
+                    {platform.name}
+                  </span>
+                </motion.div>
+              </Link>
+            ))}
+          </motion.div>
+        </motion.section>
       </div>
     </div>
   );
