@@ -8,13 +8,14 @@ const Banner = () => {
     <div className="">
       <div
         className="hero max-w-[490px] md:max-w-[1040px] lg:max-w-[1540px] mx-auto mb-10 mt-10 bg-no-repeat bg-cover"
-        style={{ backgroundImage: "url('/web-development1.png')" }}
+        // style={{ backgroundImage: "url('/web-development1.png')" }}
+        style={{ backgroundImage: "url('/banner.jpg')" }}
       >
         <div className="hero-overlay bg-opacity-70  flex flex-col md:flex-row items-center lg:p-32 md:px-8 px-4 py-8 md:py-2">
           <div className=" w-full md:w-[70%]">
             <h1 className="animate__animated animate__fadeInLeft">
               <span className="text-[40px] md:text-4xl lg:text-6xl font-bold text-white">
-                Hi! I am Nafis Ahamed
+                Hi! I am Rakesh Biswas
               </span>
             </h1>
             <p className="text-[20px] md:text-2xl lg:text-4xl text-white">
@@ -22,7 +23,7 @@ const Banner = () => {
                 words={["Full Stack developer", "Backend Developer", "Frontend developer","Mern Stack developer"]}
                 loop={5}
                 cursor
-                cursorStyle="_"
+                cursorStyle=""
                 typeSpeed={70}
                 deleteSpeed={50}
                 delaySpeed={1000}

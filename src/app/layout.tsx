@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nafis portfolio",
-  description: "It is my professional portfolio where i introduced my skills",
+  title: "Rakesh Biswas | Portfolio",
+  description: "Explore the professional portfolio of Rakesh Biswas, showcasing expertise in full-stack web development, modern technologies, and real-world project experience.",
 };
 
 export default async function RootLayout({
@@ -25,19 +25,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
-
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
-        >
-          <Navbar1/>
-          <Toaster richColors position="top-center" />
-          <div className="min-h-screen mx-auto">{children}</div>
-        </body>
-      </html>
-   
+      >
+        <Navbar1 />
+        <Toaster richColors position="top-center" />
+        <div className="min-h-screen mx-auto">{children}</div>
+      </body>
+    </html>
   );
 }
