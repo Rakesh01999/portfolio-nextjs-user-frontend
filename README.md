@@ -1,5 +1,3 @@
-# Portfolio
-
 # Personal Portfolio - NextJS User Frontend
 
 [![Live Site](https://img.shields.io/badge/Live%20Site-Visit-brightgreen)](https://rakesh-biswas-portfolio-nextjs.vercel.app/)
