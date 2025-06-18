@@ -115,7 +115,7 @@ const Navbar1 = () => {
       </div>
       <div className="navbar-end">
         <a
-          className="btn btn-neutral mr-3 text-white"
+          className="btn btn-neutral mr-3 text-white animate-pulse"
           // href="https://drive.google.com/file/d/1OxYll_P_45jmlzNvZVTGKABn4ZTJRCP2/view?usp=drive_link"
           href="https://drive.google.com/file/d/1zao0m8IOgjcMo0fENxpWzZ0UIySmZ_3M/view"
           target="_blank"
