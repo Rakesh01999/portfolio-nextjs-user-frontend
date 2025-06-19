@@ -98,7 +98,7 @@ const Project = () => {
       <div className="flex justify-center mt-7">
         <Link href="/projects">
           {project.length > 3 && (
-            <button className="btn btn-accent bg-cyan-600  mb-4 flex justify-center text-white gap-2 hover:gap-5 hover:rounded-full">
+            <button className="btn btn-accent bg-cyan-600  mb-4 flex justify-center text-white gap-2 hover:gap-5 hover:rounded-full hover:bg-cyan-800 animate-pulse">
               <span>See All</span>
               <span className="text-xl flex justify-center">⇨</span>
             </button>
