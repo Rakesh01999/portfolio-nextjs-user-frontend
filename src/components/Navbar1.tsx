@@ -16,7 +16,7 @@ const Navbar1 = () => {
 
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
-  // ✅ Load theme from localStorage on first render
+  // Load theme from localStorage on first render
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const preferred = storedTheme ?? "light";
@@ -39,7 +39,7 @@ const Navbar1 = () => {
           key={href}
           href={href}
           className={`${
-            pathname === href ? "text-white font-bold" : "text-white"
+            pathname === href ? "text-white font-bold text-lg" : "text-white text-lg"
           } ${label === "Home" ? "ml-3" : ""}`}
         >
           {label}
