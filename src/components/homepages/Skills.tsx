@@ -272,9 +272,16 @@ const Skills = () => {
           className="mb-24"
         >
           <div className="text-center my-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-cyan-500">
+            {/* <h2 className="text-3xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-cyan-500">
               Problem Solving Skills
-            </h2>
+            </h2> */}
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-gray-700 to-cyan-500">
+                Problem Solving Skills
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-gray-700 to-cyan-500 mx-auto"></div>
+            </div>
+
             <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
               I have solved over
               <span className="font-semibold text-cyan-600"> 400+ </span>
@@ -290,8 +297,7 @@ const Skills = () => {
           >
             {codingPlatforms.map((platform, index) => (
               <Link
-              key={index}
-                  
+                key={index}
                 href={platform.href}
                 target="_blank"
                 rel="noopener noreferrer"
