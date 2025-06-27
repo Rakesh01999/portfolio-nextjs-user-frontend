@@ -117,7 +117,8 @@ const Navbar1 = () => {
         <a
           className="btn btn-neutral mr-3 text-white animate-pulse"
           // href="https://drive.google.com/file/d/1OxYll_P_45jmlzNvZVTGKABn4ZTJRCP2/view?usp=drive_link"
-          href="https://drive.google.com/file/d/1zao0m8IOgjcMo0fENxpWzZ0UIySmZ_3M/view"
+          // href="https://drive.google.com/file/d/1zao0m8IOgjcMo0fENxpWzZ0UIySmZ_3M/view"
+          href="https://drive.google.com/file/d/1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7/view?usp=drive_link"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -125,8 +126,8 @@ const Navbar1 = () => {
         </a>
         <a
           className="btn btn-neutral mr-3 text-white animate-pulse"
-          // href="https://drive.google.com/uc?export=download&id=1OxYll_P_45jmlzNvZVTGKABn4ZTJRCP2"
-          href="https://drive.google.com/uc?export=download&id=1zao0m8IOgjcMo0fENxpWzZ0UIySmZ_3M"
+          // href="https://drive.google.com/uc?export=download&id=1zao0m8IOgjcMo0fENxpWzZ0UIySmZ_3M"
+          href="https://drive.google.com/uc?export=download&id=1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7"          
           target="_blank"
           rel="noopener noreferrer"
         >
