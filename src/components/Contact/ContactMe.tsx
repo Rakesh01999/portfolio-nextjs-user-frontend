@@ -36,7 +36,8 @@ const ContactMe = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gray-100 dark:bg-gray-900 py-20 px-6">
+    // <section className="min-h-screen bg-gray-100 dark:bg-gray-900 py-20 px-6">
+    <section className="min-h-screen dark:bg-gray-900 py-20 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Left Section - Contact Info */}
         <div className="space-y-6 text-gray-800 dark:text-white mt-10">
