@@ -41,6 +41,16 @@ const Navbar1 = () => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
+
+    // Dispatch custom event so ThemeProvider can react
+    window.dispatchEvent(new Event("themeChanged"));
+
+    // Also toggle dark class for Tailwind
+    if (newTheme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return (
@@ -49,8 +59,8 @@ const Navbar1 = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled
-          ? "glass-strong shadow-lg shadow-[var(--shadow-color)]"
-          : "bg-transparent"
+        ? "glass-strong shadow-lg shadow-[var(--shadow-color)]"
+        : "bg-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,8 +82,8 @@ const Navbar1 = () => {
                 key={href}
                 href={href}
                 className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${pathname === href
-                    ? "text-white"
-                    : "text-[var(--text-secondary)] hover:text-[var(--text-color)]"
+                  ? "text-white"
+                  : "text-[var(--text-secondary)] hover:text-[var(--text-color)]"
                   }`}
               >
                 {pathname === href && (
@@ -184,8 +194,8 @@ const Navbar1 = () => {
                     href={href}
                     onClick={() => setMobileOpen(false)}
                     className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${pathname === href
-                        ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
-                        : "text-[var(--text-secondary)] hover:bg-[var(--input-bg)] hover:text-[var(--text-color)]"
+                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
+                      : "text-[var(--text-secondary)] hover:bg-[var(--input-bg)] hover:text-[var(--text-color)]"
                       }`}
                   >
                     {label}

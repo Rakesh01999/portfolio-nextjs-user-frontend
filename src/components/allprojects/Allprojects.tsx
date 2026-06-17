@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 "use client";
 
 import projectUser from "@/utils/actions/projectUser";
@@ -168,8 +167,8 @@ const AllProject = () => {
                   key={page}
                   onClick={() => setCurrentPage(page)}
                   className={`w-8 h-8 rounded-lg text-sm font-medium transition-all duration-300 ${currentPage === page
-                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
-                      : "bg-[var(--card-bg)] border border-[var(--card-border)] text-[var(--text-secondary)] hover:border-cyan-500/50"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
+                    : "bg-[var(--card-bg)] border border-[var(--card-border)] text-[var(--text-secondary)] hover:border-cyan-500/50"
                     }`}
                 >
                   {page}

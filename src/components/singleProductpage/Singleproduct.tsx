@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 "use client";
 
 import projectUser from "@/utils/actions/projectUser";
