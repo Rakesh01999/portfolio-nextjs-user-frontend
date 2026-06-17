@@ -1,10 +1,18 @@
 const Spinner = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-14 h-14 border-8 border-teal-600 border-dotted rounded-full animate-spin"></div>
+      <div className="relative">
+        {/* Outer ring */}
+        <div className="w-16 h-16 border-4 border-[var(--card-border)] rounded-full" />
+        {/* Spinning ring */}
+        <div className="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-cyan-500 border-r-cyan-500 rounded-full animate-spin" />
+        {/* Center dot */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-cyan-500 animate-pulse" />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Spinner;
-

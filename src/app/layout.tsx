@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   title: "Rakesh Biswas | Portfolio",
   description:
     "Explore the professional portfolio of Rakesh Biswas, showcasing expertise in full-stack web development, modern technologies, and real-world project experience.",
+  keywords: ["Rakesh Biswas", "Full Stack Developer", "MERN Stack", "Portfolio", "Web Developer"],
 };
 
 export default async function RootLayout({
@@ -34,8 +35,18 @@ export default async function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <Navbar1 />
-          <Toaster richColors position="top-center" />
-          <div className="min-h-screen mx-auto">{children}</div>
+          <Toaster
+            richColors
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: "var(--card-bg)",
+                color: "var(--text-color)",
+                border: "1px solid var(--card-border)",
+              },
+            }}
+          />
+          <main className="min-h-screen mx-auto">{children}</main>
           <Footer />
         </div>
       </ThemeProvider>

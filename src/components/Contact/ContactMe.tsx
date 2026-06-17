@@ -7,9 +7,12 @@ import {
   FaTelegramPlane,
   FaPhoneAlt,
   FaMapMarkerAlt,
+  FaPaperPlane,
 } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
 import createMessage from "@/utils/actions/createMessage";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 const ContactMe = () => {
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,6 +30,7 @@ const ContactMe = () => {
 
       if (res?.success) {
         toast.success("Successfully sent Message");
+        (e.target as HTMLFormElement).reset();
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -35,125 +39,208 @@ const ContactMe = () => {
     }
   };
 
+  const contactInfo = [
+    {
+      icon: <FaMapMarkerAlt size={20} />,
+      label: "Location",
+      value: "Khulna, Bangladesh",
+      color: "from-cyan-500 to-blue-600",
+    },
+    {
+      icon: <FaPhoneAlt size={20} />,
+      label: "Phone",
+      value: "+8801999647103",
+      color: "from-teal-500 to-cyan-600",
+    },
+    {
+      icon: <FaWhatsapp size={20} />,
+      label: "WhatsApp",
+      value: "+8801999647103",
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      icon: <FaTelegramPlane size={20} />,
+      label: "Telegram",
+      value: "+8801999647103",
+      color: "from-blue-500 to-indigo-600",
+    },
+  ];
+
+  const socialLinks = [
+    {
+      href: "https://www.linkedin.com/in/rakeshbiswas0199/",
+      icon: <FaLinkedinIn size={20} />,
+      label: "LinkedIn",
+    },
+    {
+      href: "https://github.com/Rakesh01999",
+      icon: <FaGithub size={20} />,
+      label: "GitHub",
+    },
+    {
+      href: "mailto:rbiswas01999@gmail.com",
+      icon: <HiMail size={20} />,
+      label: "Email",
+    },
+  ];
+
   return (
-    // <section className="min-h-screen bg-gray-100 dark:bg-gray-900 py-20 px-6">
-    <section className="min-h-screen dark:bg-gray-900 py-20 px-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Left Section - Contact Info */}
-        <div className="space-y-6 text-gray-800 dark:text-white mt-10">
-          <h2 className="text-xl md:text-2xl lg:text-4xl font-bold text-cyan-600 dark:text-cyan-400">
-            Contact Information
-          </h2>
-
-          <div className="flex items-center gap-4">
-            <FaMapMarkerAlt className="text-cyan-500" size={22} />
-            <p className="text-lg">Khulna, Bangladesh</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <FaPhoneAlt className="text-teal-500" size={22} />
-            <p className="text-lg">+8801999647103</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <FaWhatsapp className="text-green-500" size={22} />
-            <p className="text-lg">+8801999647103</p>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <FaTelegramPlane className="text-blue-400" size={22} />
-            <p className="text-lg">+8801999647103</p>
-          </div>
-
-          <div className="flex gap-6 pt-4">
-            <a
-              href="https://www.linkedin.com/in/rakeshbiswas0199/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-600 hover:text-blue-600 transition"
-            >
-              <FaLinkedinIn size={26} />
-            </a>
-            <a
-              href="https://github.com/Rakesh01999"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-cyan-600 hover:text-gray-600 dark:hover:text-gray-300 transition"
-            >
-              <FaGithub size={26} />
-            </a>
-          </div>
-        </div>
-
-        {/* Right Section - Contact Form */}
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 sm:p-10 space-y-6 mt-10"
+    <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold text-center text-cyan-600 dark:text-white">
-            Send a Message
+          <h2 className="text-3xl md:text-5xl font-bold gradient-text">
+            Get In Touch
           </h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-600 mx-auto mt-4 rounded-full"
+          />
+          <p className="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto">
+            Have a project in mind or want to collaborate? Feel free to reach out!
+          </p>
+        </motion.div>
 
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Your name"
-              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              required
-            />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Section - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-6 space-y-5">
+              <h3 className="text-xl font-bold gradient-text">
+                Contact Information
+              </h3>
 
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Your email"
-              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              required
-            />
-          </div>
+              {contactInfo.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  className="flex items-center gap-4 group"
+                >
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300`}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-xs text-[var(--text-secondary)] font-medium uppercase tracking-wider">
+                      {item.label}
+                    </p>
+                    <p className="text-[var(--text-color)] font-medium">
+                      {item.value}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Message
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              rows={4}
-              placeholder="Write your message..."
-              className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-teal-500 focus:ring-teal-500"
-              required
-            ></textarea>
-          </div>
+            {/* Social Links */}
+            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-6">
+              <h3 className="text-lg font-bold text-[var(--text-color)] mb-4">
+                Follow Me
+              </h3>
+              <div className="flex gap-3">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.href}
+                    target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                    rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-11 h-11 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-cyan-500 hover:border-cyan-500 transition-all duration-300"
+                    aria-label={link.label}
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
-          <div className="text-center pt-2">
-            <button
+          {/* Right Section - Contact Form */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-6 sm:p-8 space-y-5"
+          >
+            <h3 className="text-xl font-bold gradient-text text-center">
+              Send a Message
+            </h3>
+
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your name"
+                className="w-full px-4 py-3 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-color)] placeholder:text-[var(--text-secondary)]/50 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your email"
+                className="w-full px-4 py-3 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-color)] placeholder:text-[var(--text-secondary)]/50 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300"
+                required
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5"
+              >
+                Message
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                rows={5}
+                placeholder="Write your message..."
+                className="w-full px-4 py-3 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--text-color)] placeholder:text-[var(--text-secondary)]/50 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 resize-none"
+                required
+              ></textarea>
+            </div>
+
+            <motion.button
               type="submit"
-              className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 shadow-md"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 flex items-center justify-center gap-2"
             >
-              Submit
-            </button>
-          </div>
-        </form>
+              <FaPaperPlane size={16} />
+              Send Message
+            </motion.button>
+          </motion.form>
+        </div>
       </div>
     </section>
   );

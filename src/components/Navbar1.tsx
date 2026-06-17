@@ -3,9 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaSun, FaMoon } from "react-icons/fa";
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const Navbar1 = () => {
   const pathname = usePathname();
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/projects", label: "Projects" },
@@ -14,134 +21,197 @@ const Navbar1 = () => {
     { href: "/experience", label: "Experience" },
   ];
 
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-
-  // Load theme from localStorage on first render
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     const preferred = storedTheme ?? "light";
-
     setTheme(preferred);
     document.documentElement.setAttribute("data-theme", preferred);
   }, []);
 
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newTheme = e.target.checked ? "dark" : "light";
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleToggle = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.setAttribute("data-theme", newTheme);
   };
 
-  const links = (
-    <div className="space-x-3 gap-4 flex sm:flex-col lg:flex-row">
-      {navLinks.map(({ href, label }) => (
-        <Link
-          key={href}
-          href={href}
-          className={`${
-            pathname === href ? "text-white font-bold text-lg" : "text-white text-lg"
-          } ${label === "Home" ? "ml-3" : ""}`}
-        >
-          {label}
-        </Link>
-      ))}
-
-      <section className="flex items-center">
-        <label className="flex gap-2">
-          {/* Sun Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-          </svg>
-
-          <input
-            type="checkbox"
-            onChange={handleToggle}
-            checked={theme === "dark"}
-            className="toggle theme-controller"
-          />
-
-          {/* Moon Icon */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </label>
-      </section>
-    </div>
-  );
-
   return (
-    <div className="navbar fixed z-10 w-full bg-cyan-700 h-20 text-white">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <button tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled
+          ? "glass-strong shadow-lg shadow-[var(--shadow-color)]"
+          : "bg-transparent"
+        }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-18">
+          {/* Logo / Brand */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm shadow-md group-hover:shadow-cyan-500/30 transition-shadow duration-300">
+              RB
+            </div>
+            <span className="text-lg font-semibold gradient-text hidden sm:block">
+              Rakesh Biswas
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${pathname === href
+                    ? "text-white"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-color)]"
+                  }`}
+              >
+                {pathname === href && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{label}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Right Section: Theme Toggle + Resume */}
+          <div className="hidden md:flex items-center gap-3">
+            {/* Theme Toggle */}
+            <button
+              onClick={handleToggle}
+              className="relative w-10 h-10 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] flex items-center justify-center hover:border-[var(--accent-color)] transition-all duration-300 group"
+              aria-label="Toggle theme"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </button>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-cyan-700 rounded-box mt-3 w-52 p-2 shadow"
-          >
-            {links}
-          </ul>
+              <AnimatePresence mode="wait">
+                {theme === "dark" ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -90, scale: 0 }}
+                    animate={{ rotate: 0, scale: 1 }}
+                    exit={{ rotate: 90, scale: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-yellow-400"
+                  >
+                    <FaSun size={18} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 90, scale: 0 }}
+                    animate={{ rotate: 0, scale: 1 }}
+                    exit={{ rotate: -90, scale: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-slate-600"
+                  >
+                    <FaMoon size={18} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+
+            {/* Resume Button */}
+            <a
+              href="https://drive.google.com/file/d/1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-[1.02]"
+            >
+              Resume
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-3">
+            <button
+              onClick={handleToggle}
+              className="w-9 h-9 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] flex items-center justify-center"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? (
+                <FaSun size={16} className="text-yellow-400" />
+              ) : (
+                <FaMoon size={16} className="text-slate-600" />
+              )}
+            </button>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="w-9 h-9 rounded-lg bg-[var(--input-bg)] border border-[var(--input-border)] flex items-center justify-center"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? (
+                <HiX size={20} className="text-[var(--text-color)]" />
+              ) : (
+                <HiMenuAlt3 size={20} className="text-[var(--text-color)]" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
-      </div>
-
-      <div className="navbar-end">
-        <a
-          className="btn btn-neutral mr-3 text-white animate-pulse"
-          href="https://drive.google.com/file/d/1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7/view?usp=drive_link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Resume
-        </a>
-        <a
-          className="btn btn-neutral mr-3 text-white animate-pulse"
-          href="https://drive.google.com/uc?export=download&id=1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Download Resume
-        </a>
-      </div>
-    </div>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden glass-strong overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navLinks.map(({ href, label }, index) => (
+                <motion.div
+                  key={href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Link
+                    href={href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${pathname === href
+                        ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white"
+                        : "text-[var(--text-secondary)] hover:bg-[var(--input-bg)] hover:text-[var(--text-color)]"
+                      }`}
+                  >
+                    {label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05 }}
+                className="pt-2"
+              >
+                <a
+                  href="https://drive.google.com/file/d/1gzi0cDSkVTIR-Ase9rAiCOtDzLzspZD7/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-medium text-center"
+                >
+                  View Resume
+                </a>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 
