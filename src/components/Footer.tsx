@@ -30,7 +30,7 @@ const Footer = () => {
       label: "Email",
     },
     {
-      href: "https://www.facebook.com/rakeshbiswas.biswas.9843/",
+      href: "https://www.facebook.com/RakeshBiswasFB/",
       icon: <FaFacebook size={18} />,
       label: "Facebook",
     },
