@@ -8,6 +8,7 @@ import {
   FaPhoneAlt,
   FaMapMarkerAlt,
   FaPaperPlane,
+  FaFacebook,
 } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
 import createMessage from "@/utils/actions/createMessage";
@@ -67,6 +68,11 @@ const ContactMe = () => {
   ];
 
   const socialLinks = [
+    {
+      href: "https://www.facebook.com/RakeshBiswasFB/",
+      icon: <FaFacebook size={20} />,
+      label: "Facebook",
+    },
     {
       href: "https://www.linkedin.com/in/rakeshbiswas0199/",
       icon: <FaLinkedinIn size={20} />,
